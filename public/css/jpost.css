@@ -1,0 +1,16 @@
+table {
+  width: 100%;
+	margin: 10px;
+}
+
+.table-panel {
+	padding: 25px;
+}
+
+.hidden {
+  display: none;
+}
+
+.btn {
+  text-transform: none !important;
+}
