@@ -56,10 +56,10 @@
 </ul>
 <div class="tab-content slice-container">
   <div class="tab-pane fade in active table-panel" id="slice">
-    <div style="margin-left: auto;">
-      <button onclick="jPost.exportSlice( '{{ $slice }}' )" class="glyphicon glyphicon-export" data-toggle="tooltip" title="Export Slice"></button>'
-      <button onclick="jPost.openRenameDialog( '{{ $slice }}' )" class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Rename Slice"></button>'
-      <button onclick="jPost.deleteSlice( '{{ $slice }}' )" class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Delete Slice"></button>';
+    <div style="margin-left: auto; text-align: right;">
+      <a href="javascript:jPost.exportSlice( '{{ $slice }}' )" title="Export the slice."><span class="glyphicon glyphicon-export">&nbsp;</span></a>
+      <a href="javascript:jPost.openRenameDialog( '{{ $slice }}' )" title="Rename the slice."><span class="glyphicon glyphicon-edit">&nbsp;</span></a>
+      <a href="javascript:jPost.deleteSlice( '{{ $slice }}' )" title="Export the slice."><span class="glyphicon glyphicon-trash">&nbsp;</span></a>
     </div>
 
     <h3>KEGG Global Pathway</h3>

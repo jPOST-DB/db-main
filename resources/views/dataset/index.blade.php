@@ -5,14 +5,15 @@
 <h2>Dataset: {{ $id }}</h2>
 <div id="table_dataset"></div>
 
-<h3>KEGG Global Pathway</h3>
-<div id="kegg_global_map"></div>
-
 <h3>Chromosome Info.</h3>
 <div id="dataset_chromosome"></div>
 
 <h3>Protein Existence</h3>
 <div id="protein_evidence"></div>
+
+<h3>KEGG Pathway Mapping</h3>
+<div id="kegg_mapping_form"></div>
+
 
 <ul class="nav nav-tabs">
   <li class="nav-item active"><a class="nav-link bg-primary" href="#table-tab-protein" data-toggle="tab">Protein</a></li>
@@ -33,7 +34,7 @@
 
 <script>
     var stanzas = [
-        'table_dataset', 'kegg_global_map', 'dataset_chromosome', 'protein_evidence'
+        'table_dataset', 'kegg_mapping_form', 'dataset_chromosome', 'protein_evidence'
     ];
 
     stanzas.forEach(
