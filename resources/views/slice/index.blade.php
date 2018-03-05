@@ -14,7 +14,6 @@
     );
 ?>
 
-
 <div class="panel panel-primary slice-container" style="min-width: 800px; margin: 0 auto;">
   <div class="panel-heading">
     <h4 class="panel-title">
@@ -57,7 +56,11 @@
 </ul>
 <div class="tab-content slice-container">
   <div class="tab-pane fade in active table-panel" id="slice">
-
+    <div style="margin-left: auto;">
+      <button onclick="jPost.exportSlice( '{{ $slice }}' )" class="glyphicon glyphicon-export" data-toggle="tooltip" title="Export Slice"></button>'
+      <button onclick="jPost.openRenameDialog( '{{ $slice }}' )" class="glyphicon glyphicon-edit" data-toggle="tooltip" title="Rename Slice"></button>'
+      <button onclick="jPost.deleteSlice( '{{ $slice }}' )" class="glyphicon glyphicon-trash" data-toggle="tooltip" title="Delete Slice"></button>';
+    </div>
 
     <h3>KEGG Global Pathway</h3>
     <div id="kegg_global_map"></div>

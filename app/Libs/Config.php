@@ -7,7 +7,7 @@ namespace App\Libs;
  */
 class  Config {
     /** default stanza service */
-    public static $DEFAULT_STANZA_SERVICE = 'http://db-dev.jpostdb.org/ts' ;
+    public static $DEFAULT_STANZA_SERVICE = 'http://tools.jpostdb.org/ts' ;
 
     /** default sparql endpoint */
     public static $DEFAULT_END_POINT = 'http://localhost/proxy/sparql';
