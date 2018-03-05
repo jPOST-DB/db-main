@@ -354,3 +354,58 @@ jPost.exportSlice = function( name ) {
 jPost.importSlices = function() {
 	 $( '#upload_slices' ).click();
 }
+
+// open rename dialog
+jPost.openRenameDialog = function( name ) {
+    $( '#dialog-rename-slice-old-name' ).val( name );
+    $( '#dialog-rename-slice-new-name' ).val( name );
+    $( '#dialog-rename-slice' ).modal( 'show' );
+}
+
+// rename slice
+jPost.renameSlice = function() {
+    var oldName = $( '#dialog-rename-slice-old-name' ).val();
+	  var newName = $( '#dialog-rename-slice-new-name' ).val();
+
+	  if( oldName == newName ) {
+		    return;
+	  }
+
+	  var slice = jPost.getSlice( newName );
+	  if( slice != null ) {
+		    alert( 'Slice "' + newName + '" already exists.' );
+		    return;
+	  }
+
+	  slice = jPost.getSlice( oldName );
+	  slice.name = newName;
+    jPost.saveSlices();
+
+    location.reload();
+}
+
+
+// delete slice
+jPost.deleteSlice = function( name ) {
+    if( confirm( 'Are you sure to delete the slice?' ) ) {
+        var index = -1;
+        for( var i = 0; i < jPost.slices.length; i++ ) {
+            if( jPost.slices[ i ].name == name ) {
+                index = i;
+            }
+        }
+
+        if( index >= 0 ) {
+            jPost.slices.splice( index, 1 );
+        }
+
+        jPost.saveSlices();
+        name = $( '#slice-name' ).val();
+        if( name === '' ) {
+              location.reload();
+        }
+        else {
+            window.location.href = 'slices'
+        }
+    }
+}

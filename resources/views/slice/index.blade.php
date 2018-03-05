@@ -56,11 +56,7 @@
 </ul>
 <div class="tab-content slice-container">
   <div class="tab-pane fade in active table-panel" id="slice">
-    <div style="margin-left: auto; text-align: right;">
-      <a href="javascript:jPost.exportSlice( '{{ $slice }}' )" title="Export the slice."><span class="glyphicon glyphicon-export">&nbsp;</span></a>
-      <a href="javascript:jPost.openRenameDialog( '{{ $slice }}' )" title="Rename the slice."><span class="glyphicon glyphicon-edit">&nbsp;</span></a>
-      <a href="javascript:jPost.deleteSlice( '{{ $slice }}' )" title="Export the slice."><span class="glyphicon glyphicon-trash">&nbsp;</span></a>
-    </div>
+    <div id="button-field" style="margin-left: auto; text-align: right;"></div>
 
     <h3>Chromosome Info.</h3>
     <div id="dataset_chromosome"></div>
@@ -93,6 +89,27 @@
   </div>
 </div>
 
+<div id="dialog-rename-slice" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content" style="padding: 15px;">
+      <div class="modal-header">
+        <h4 class="modal-title">Rename Slice</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group row">
+          <label class="col-2">Slice Name</label>
+          <input type="text" id="dialog-rename-slice-new-name" name="name" required class="form-control col-10" value="">
+          <input type="hidden" id="dialog-rename-slice-old-name">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" onClick="jPost.renameSlice()">Rename</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <input type="file" id="upload_slices" name="file" style="display: none;"></input>
 
 <script>
@@ -116,18 +133,25 @@
         $( '.slice-container' ).css( 'display', 'none' );
     }
 
-    var name = '{{ $slice }}';
-    var slice = jPost.getSlice( name );
-    if( slice == null && jPost.slices.length > 0 ) {
-        slice = jPost.slices[ 0 ];
-        name = slice.name;
-    }
+    jPost.setSlice();
+    var slice = jPost.slice;
+    var name = ( slice === null ? '' : slice.name );
 
     jPost.createSliceTabs( name );
-
-    jPost.setSlice();
     jPost.createDatasetTable( true );
     jPost.createProteinTable( true );
+
+    var tag = '<a href="javascript:jPost.exportSlice( ' + "'" + name + "'"
+            + ' )" title="Export the slice."><span class="glyphicon glyphicon-export">&nbsp;</span></a>';
+    $( '#button-field' ).append( tag );
+
+    tag = '<a href="javascript:jPost.openRenameDialog( ' + "'" + name + "'"
+        + ' )" title="Rename the slice."><span class="glyphicon glyphicon-edit">&nbsp;</span></a>';
+    $( '#button-field' ).append( tag );
+
+    tag = '<a href="javascript:jPost.deleteSlice( ' + "'" + name + "'"
+        + ' )" title="Export the slice."><span class="glyphicon glyphicon-trash">&nbsp;</span></a>';
+    $( '#button-field' ).append( tag );
 
     var stanzas = [
         'kegg_mapping_form', 'dataset_chromosome', 'protein_evidence'
