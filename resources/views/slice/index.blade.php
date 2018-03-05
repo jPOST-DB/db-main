@@ -62,14 +62,14 @@
       <a href="javascript:jPost.deleteSlice( '{{ $slice }}' )" title="Export the slice."><span class="glyphicon glyphicon-trash">&nbsp;</span></a>
     </div>
 
-    <h3>KEGG Global Pathway</h3>
-    <div id="kegg_global_map"></div>
-
     <h3>Chromosome Info.</h3>
     <div id="dataset_chromosome"></div>
 
     <h3>Protein Existence</h3>
     <div id="protein_evidence"></div>
+
+    <h3>KEGG Pathway Mapping</h3>
+    <div id="kegg_mapping_form"></div>
 
     <ul class="nav nav-tabs" style="margin-top: 25px;">
       <li class="nav-item active"><a class="nav-link bg-primary" href="#table-tab-dataset" data-toggle="tab">Dataset</a></li>
@@ -130,7 +130,7 @@
     jPost.createProteinTable( true );
 
     var stanzas = [
-        'kegg_global_map', 'dataset_chromosome', 'protein_evidence'
+        'kegg_mapping_form', 'dataset_chromosome', 'protein_evidence'
     ];
 
     if( slice !== null && slice.datasets.length > 0 ) {

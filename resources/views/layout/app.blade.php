@@ -13,8 +13,6 @@
     <link href="css/select2.min.css" rel="stylesheet">
     <link href="css/jpost.css" rel="stylesheet">
 
-    <link href="http://db-dev.jpostdb.org/ts/stanza/group_comp/" rel="import">
-
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/jquery.numeric.min.js"></script>

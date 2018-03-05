@@ -3,6 +3,7 @@ jPost.tmp = {
     datasets: null,
     slice: null
 };
+jPost.slice = null;
 
 // get slice
 jPost.getSlice = function( name ) {
@@ -114,6 +115,8 @@ jPost.setSlice = function() {
     if( jPost.sets.datasets.length === 0 ) {
         jPost.sets.datasets.push( 'DS99_999999' );
     }
+
+    jPost.slice = slice;
 }
 
 // add datasets to slice
@@ -127,12 +130,6 @@ jPost.addDatasetsToSlice = function() {
         return;
 	  }
 
-    var name = $( '#slice-name' ).val();
-    var slice = jPost.getSlice();
-    if( slice === null && jPost.slices.length > 0 ) {
-        slice = jPost.slices[ 0 ];
-    }
-
 	  jPost.tmp.datasets = array;
 
     jPost.updateSliceSelection();
@@ -144,10 +141,7 @@ jPost.addDatasetsToSlice = function() {
 
 // update slice selection
 jPost.updateSliceSelection = function() {
-    var slice = jPost.getSlice();
-    if( slice === null && jPost.slices.length > 0 ) {
-        slice = jPost.slices[ 0 ];
-    }
+    var slice = jPost.slice;
 
     if( slice == null ) {
 		    $( '#select-slice' ).html( '<option value="" selected>+ (New Slice)</option>' );
