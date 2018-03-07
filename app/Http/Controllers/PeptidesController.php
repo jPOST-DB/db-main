@@ -41,8 +41,8 @@ class PeptidesController extends Controller{
             $accession = $element[ 'accession' ];
             $name = $element[ 'full_name' ];
 
-            $element[ 'peptide_id' ] = '<a href="peptide?id=' . $peptideId . '">' . $peptideId . '</a>';
-            $element[ 'dataset_id' ] = '<a href="dataset?id=' . $datasetId . '">' . $datasetId . '</a>';
+            $element[ 'peptide_id' ] = '<a href="javascript:jPost.openPeptide(' . "'" . $peptideId . "'" . ')">' . $peptideId . '</a>';
+            $element[ 'dataset_id' ] = '<a href="javascript:jPost.openDataset(' . "'" . $datasetId . "'" . ')">' . $datasetId . '</a>';
             $element[ 'accession' ] = '<a href="http://www.uniprot.org/uniprot/' . $accession . '">' . $accession . '</a>';
             $element[ 'full_name' ] = '<a href="protein?id=' . $accession . '">' . $name . '</a>';
 

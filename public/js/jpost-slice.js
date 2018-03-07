@@ -81,20 +81,6 @@ jPost.openPeptide = function( id ) {
     jPost.submitPage( 'peptide', params );
 }
 
-// open psm
-jPost.openPeptide = function( id ) {
-    var name = $( '#slice-name' ).val();
-    var slice = jPost.getSlice( name );
-    var params = { id : id };
-
-    if( slice !== null ) {
-        params.slice = slice.name;
-        params.datasets = slice.datasets.join( ',' );
-    }
-
-    jPost.submitPage( 'psm', params );
-}
-
 // slice
 jPost.setSlice = function() {
     var name = $( '#slice-name' ).val();
@@ -110,6 +96,8 @@ jPost.setSlice = function() {
                 jPost.sets.datasets.push( dataset );
             }
         );
+
+        $( '#slice-name' ).val( slice.name );
     }
 
     if( jPost.sets.datasets.length === 0 ) {
@@ -142,24 +130,28 @@ jPost.addDatasetsToSlice = function() {
 // update slice selection
 jPost.updateSliceSelection = function() {
     var slice = jPost.slice;
+    if( slice === null && jPost.slices.length > 0 ) {
+        slice = jPost.slices[ 0 ];
+    }
 
-    if( slice == null ) {
+    if( slice === null ) {
 		    $( '#select-slice' ).html( '<option value="" selected>+ (New Slice)</option>' );
 	  }
 	  else {
 		    $( '#select-slice' ).html( '<option value="">+ (New Slice)</option>' );
-	  }
+    }
 
-	  jPost.slices.forEach(
-		    function( tmp ) {
-			       if( tmp.name === slice.name ) {
-				         $( '#select-slice' ).append( '<option value="' + tmp.name + '" selected>' + tmp.name + '</option>' );
-			       }
-			       else {
-				         $( '#select-slice' ).append( '<option value="' + tmp.name + '">' + tmp.name + '</option>' );
-			       }
+    jPost.slices.forEach(
+        function( tmp ) {
+		        if( tmp.name === slice.name ) {
+				        $( '#select-slice' ).append( '<option value="' + tmp.name + '" selected>' + tmp.name + '</option>' );
+			      }
+			      else {
+				        $( '#select-slice' ).append( '<option value="' + tmp.name + '">' + tmp.name + '</option>' );
+			      }
         }
     );
+
 
     $( '#select-slice' ).change(
         function() {

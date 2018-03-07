@@ -51,7 +51,7 @@ class ProteinsController extends Controller {
             $name = $element[ 'full_name' ];
 
             $element[ 'accession' ] = '<a href="http://www.uniprot.org/uniprot/' . $accession . '">' . $accession . '</a>';
-            $element[ 'full_name' ] = '<a href="protein?id=' . $accession . '">' . $name . '</a>';
+            $element[ 'full_name' ] = '<a href="javascript:jPost.openProtein(' . "'" . $accession . "'" . ')">' . $name . '</a>';
             $element[ 'sequence_length' ] = $element[ 'length' ];
             $element[ 'check'] = '<input type="checkbox" class="check_protein" name="proteins" value="' . $accession . '">';
 
