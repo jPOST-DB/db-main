@@ -47,12 +47,14 @@
   </div>
 </div>
 
+<div id="message"></div>
+
 <div style="margin: 10pt 0">
     <button id="export-all-slices" class='btn' onclick="jPost.importSlices()">Import Slices</button>
-    <button id="export-all-slices" class='btn' onclick="jPost.exportSlice( '' )">Export All Slices</button>
+    <button id="export-all-slices" class='btn slice-container' onclick="jPost.exportSlice( '' )">Export All Slices</button>
 </div>
 
-<ul id="slice-items" class="nav nav-tabs" style="margin-top: 25px;">
+<ul id="slice-items" class="nav nav-tabs slice-container" style="margin-top: 25px;">
 </ul>
 <div class="tab-content slice-container">
   <div class="tab-pane fade in active table-panel" id="slice">
@@ -131,6 +133,7 @@
 
     if( jPost.slices.length === 0 ) {
         $( '.slice-container' ).css( 'display', 'none' );
+        $( '#message' ).html( 'There is no slice.' );
     }
 
     jPost.setSlice();
