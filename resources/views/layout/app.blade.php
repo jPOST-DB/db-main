@@ -137,7 +137,8 @@
       </div>
     </div>
 
-    <form id="common-form" method="get">
+    <form id="common-form" method="post">
+      {{ csrf_field() }}
     </form>
     <div id="tmp" style="display: none;">
     </div>

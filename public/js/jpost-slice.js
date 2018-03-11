@@ -82,12 +82,14 @@ jPost.openPeptide = function( id ) {
 }
 
 // slice
-jPost.setSlice = function() {
+jPost.setSlice = function( force ) {
     var name = $( '#slice-name' ).val();
     var slice = jPost.getSlice( name );
 
-    if( slice === null && jPost.slices.length > 0 ) {
-        slice = jPost.slices[ 0 ];
+    if( force ) {
+        if( slice === null && jPost.slices.length > 0 ) {
+            slice = jPost.slices[ 0 ];
+        }
     }
 
     if( slice !== null ) {
@@ -98,10 +100,10 @@ jPost.setSlice = function() {
         );
 
         $( '#slice-name' ).val( slice.name );
-    }
 
-    if( jPost.sets.datasets.length === 0 ) {
-        jPost.sets.datasets.push( 'DS99_999999' );
+        if( jPost.sets.datasets.length === 0 ) {
+            jPost.sets.datasets.push( 'DS99_999999' );
+        }
     }
 
     jPost.slice = slice;
@@ -302,12 +304,9 @@ jPost.compareSlices = function() {
     var datasets1 = encodeURI( slice1.datasets.join( ' ' ) );
     var datasets2 = encodeURI( slice2.datasets.join( ' ' ) );
 
-    var url = 'stanza?stanza=slice_comp_stat&dataset1='
-            + datasets1 + '&dataset2=' + datasets2;
-    $( '#comparison-table' ).load( url );
-
-    url = 'stanza?stanza=group_comp&method=sc&valid=eb&dataset1='
-            + datasets1 + '&dataset2=' + datasets2;
+    var url = 'stanza?stanza=slice_comparison&dataset1='
+            + datasets1 + '&dataset2=' + datasets2
+            + '&slice1=' + name1 + '&slice2=' + name2;
     $( '#comparison-chart' ).load( url );
 }
 

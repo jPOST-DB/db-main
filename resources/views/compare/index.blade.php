@@ -24,8 +24,6 @@
   </div>
 </div>
 
-<div id="comparison-table">
-</div>
 <div id="comparison-chart">
 </div>
 

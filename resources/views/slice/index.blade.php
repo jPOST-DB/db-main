@@ -136,7 +136,7 @@
         $( '#message' ).html( 'There is no slice.' );
     }
 
-    jPost.setSlice();
+    jPost.setSlice( true );
     var slice = jPost.slice;
     var name = ( slice === null ? '' : slice.name );
 
