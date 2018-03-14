@@ -42,7 +42,7 @@
 
     jPost.sets[ 'proteins' ] = [ '{{ $id }}' ];
 
-    jPost.setSlice( false );
+    jPost.setSlice();
     jPost.createPeptideTable();
     jPost.createPsmTable();
 </script>

@@ -15,7 +15,7 @@ class SliceController extends Controller {
               $slice = '';
           }
           $params[ 'slice' ] = $slice;
-          
+
           $view = view( 'slice.index', $params );
           return $view;
     }

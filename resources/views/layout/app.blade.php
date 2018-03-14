@@ -50,30 +50,31 @@
           </ul>
         </div>
       </div>
-    </nav>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
+      <div class="container-fluid slice-header" style="background-color: #008000; color: #ffffff;">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">jPOST</a>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar">
-          <ul id="header-menu" class="nav navbar-nav">
-          </ul>
+          <h5><a href="javascript:jPost.selectSlice()" style="text-decoration: none; color: #ffffff;">
+            <span id="slice-title"></span>
+            <span class="glyphicon glyphicon-triangle-bottom">&nbsp;</span>
+          </a><select class="slice-selection"></select></h5>
         </div>
       </div>
     </nav>
+    <div style="height: 100px;"></div>
+    <div class="slice-header" style="height: 75px;"></div>
 
     <input type="hidden" id="slice-name" value="{{ $slice }}" >
 
     <div class="container">
         @yield( 'content' )
     </div>
+
+    <script>
+      var slice = jPost.slice;
+      if( slice !== null ) {
+        $( '.slice-header' ).css( 'display', 'block' );
+        $( '#slice-title' ).html( slice.name );
+      }
+    </script>
 
     <div id="dialog-slice-selection" class="modal fade dialog-slice-selection">
       <div class="modal-dialog dialog-slice-selection">
