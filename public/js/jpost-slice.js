@@ -34,9 +34,6 @@ jPost.createSliceTabs = function( name ) {
             $( '#slice-items' ).append( tag );
         }
     );
-
-    var tag = '<li class="nav-item"><a href="javascript:jPost.createNewSlice()">+</a></li>';
-    $( '#slice-items' ).append( tag );
 }
 
 // open dataset
@@ -82,15 +79,11 @@ jPost.openPeptide = function( id ) {
 }
 
 // slice
-jPost.setSlice = function( force ) {
+jPost.setSlice = function() {
     var name = $( '#slice-name' ).val();
     var slice = jPost.getSlice( name );
-
-    if( force ) {
-        if( slice === null && jPost.slices.length > 0 ) {
-            slice = jPost.slices[ 0 ];
-        }
-    }
+    console.log( name );
+    console.log( slice );
 
     if( slice !== null ) {
         slice.datasets.forEach(
