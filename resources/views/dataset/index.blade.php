@@ -6,7 +6,7 @@
 <div id="table_dataset"></div>
 
 <h3>Chromosome Info.</h3>
-<div id="dataset_chromosome"></div>
+<div id="chromosome_histogram"></div>
 
 <h3>Protein Existence</h3>
 <div id="protein_evidence"></div>
@@ -34,7 +34,7 @@
 
 <script>
     var stanzas = [
-        'table_dataset', 'kegg_mapping_form', 'dataset_chromosome', 'protein_evidence'
+        'table_dataset', 'kegg_mapping_form', 'chromosome_histogram', 'protein_evidence'
     ];
 
     stanzas.forEach(

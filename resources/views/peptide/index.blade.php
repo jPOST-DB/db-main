@@ -23,7 +23,7 @@
 
     stanzas.forEach(
         function( stanza ) {
-            var url = 'stanza?stanza=' + stanza + '&uniprot={{ $id }}';
+            var url = 'stanza?stanza=' + stanza + '&peptide={{ $id }}';
             $( '#' + stanza ).load( url );
         }
     );
