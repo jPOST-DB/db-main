@@ -32,11 +32,7 @@
     jPost.setSlice();
 
     var id = '{{ $id }}';
-
     jPost.sets[ 'proteins' ] = [ id ];
-
-    jPost.createPeptideTable();
-    jPost.createPsmTable();
 
     var stanzas = [
         {
@@ -73,6 +69,9 @@
 
     jPost.setStanzas( stanzas );
     jPost.loadStanzas();
+
+    jPost.createPeptideTable();
+    jPost.createPsmTable();
 
 </script>
 

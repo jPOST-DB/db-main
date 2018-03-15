@@ -37,8 +37,6 @@
     jPost.sets[ 'datasets' ] = [ id ];
 
     jPost.setSlice();
-    jPost.createProteinTable( false );
-    jPost.createPeptideTable();
 
     var stanzas = [
         {
@@ -56,8 +54,8 @@
             }
         },
         {
-            name: 'dataset_chromosome',
-            id: 'dataset_chromosome',
+            name: 'chromosome_histogram',
+            id: 'chromosome_histogram',
             data: function() {
                 return { dataset: id }
             }
@@ -73,6 +71,9 @@
 
     jPost.setStanzas( stanzas );
     jPost.loadStanzas();
+
+    jPost.createProteinTable( false );
+    jPost.createPeptideTable();    
 </script>
 
 @endsection
