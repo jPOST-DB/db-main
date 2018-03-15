@@ -33,22 +33,45 @@
 </div>
 
 <script>
-    var stanzas = [
-        'table_dataset', 'kegg_mapping_form', 'dataset_chromosome', 'protein_evidence'
-    ];
-
-    stanzas.forEach(
-        function( stanza ) {
-            var url = 'stanza?stanza=' + stanza + '&datasets={{ $id }}&dataset={{ $id }}';
-            $( '#' + stanza ).load( url );
-        }
-    );
-
-    jPost.sets[ 'datasets' ] = [ '{{ $id }}' ];
-
+    var id = '{{ $id }}';
+    jPost.sets[ 'datasets' ] = [ id ];
     jPost.setSlice();
     jPost.createProteinTable( false );
     jPost.createPeptideTable();
+
+    var stanzas = [
+        {
+            name: 'table_dataset',
+            id: 'table_dataset',
+            data: function() {
+                return { dataset: id };
+            }
+        },
+        {
+            name: 'kegg_mapping_form',
+            id: 'kegg_mapping_form',
+            data: function() {
+                return { dataset: id }
+            }
+        },
+        {
+            name: 'dataset_chromosome',
+            id: 'dataset_chromosome',
+            data: function() {
+                return { dataset: id }
+            }
+        },
+        {
+            name: 'protein_evidence',
+            id: 'protein_evidence',
+            data:  function() {
+                return { dataset: id }
+            }
+        }
+    ];
+
+    jPost.setStanzas( stanzas );
+    jPost.loadStanzas();
 </script>
 
 @endsection

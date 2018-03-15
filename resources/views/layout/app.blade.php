@@ -52,11 +52,16 @@
       </div>
       <div class="container-fluid slice-header" style="background-color: #008000; color: #ffffff;">
         <div class="navbar-header">
-          <h5><a href="javascript:jPost.selectSlice()" style="text-decoration: none; color: #ffffff;">
-            <span id="slice-title"></span>
-            <span class="glyphicon glyphicon-triangle-bottom">&nbsp;</span>
-          </a><select class="slice-selection"></select></h5>
+          <div class="dropdown" style="float: left;">
+            <button type="button" id="dropdown-button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+              <span class="slice-title-name"></span>
+              <span class="caret"></span>
+            </button>
+            <ul id="slice-menu" class="dropdown-menu" role="menu">
+            </ul>
+          </div>
         </div>
+        <div id="slice-buttons" style="color: #ffffff; background-color: #008000;"></span>
       </div>
     </nav>
     <div style="height: 100px;"></div>
@@ -69,10 +74,18 @@
     </div>
 
     <script>
+      jPost.slices.forEach(
+          function( slice ) {
+              var tag = '<li role="presentation"><a href="javascript:jPost.selectSlice( '
+                      + "'" + slice.name + "'" + ' )">' + slice.name + '</a></li>'
+              $( '#slice-menu' ).append( tag );
+          }
+      );
+
       var slice = jPost.slice;
       if( slice !== null ) {
         $( '.slice-header' ).css( 'display', 'block' );
-        $( '#slice-title' ).html( slice.name );
+        $( '.slice-title-name' ).html( slice.name );
       }
     </script>
 
@@ -139,11 +152,8 @@
     </div>
 
     <form id="common-form" method="get">
-      {{ csrf_field() }}
     </form>
     <div id="tmp" style="display: none;">
     </div>
-
-
   </body
 </html>

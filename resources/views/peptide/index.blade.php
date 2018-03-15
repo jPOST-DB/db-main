@@ -17,20 +17,25 @@
 </div>
 
 <script>
-    var stanzas = [
-        'table_peptide'
-    ];
-
-    stanzas.forEach(
-        function( stanza ) {
-            var url = 'stanza?stanza=' + stanza + '&peptide={{ $id }}';
-            $( '#' + stanza ).load( url );
-        }
-    );
-
-    jPost.sets[ 'peptides' ] = [ '{{ $id }}' ];
+    var id = '{{ $id }}';
+    jPost.sets[ 'peptides' ] = [ id ];
     jPost.setSlice();
     jPost.createPsmTable();
+
+    var stanzas = [
+        {
+            name: 'table_peptide',
+            id: 'table_peptide',
+            data: function() {
+                return {
+                    peptide: id
+                };
+            }
+        }
+    ];
+
+    jPost.setStanzas( stanzas );
+    jPost.loadStanzas();
 </script>
 
 

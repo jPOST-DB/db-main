@@ -15,7 +15,7 @@
 ?>
 
 <div class="panel panel-primary slice-container" style="min-width: 800px; margin: 0 auto;">
-  <div class="panel-heading">
+  <div class="panel-heading" style="background-color: #008000;">
     <h4 class="panel-title">
       <a data-toggle="collapse" href="#search-form" id="search-filter-title" style="text-decoration: none;">Filters <span id="filter-header-icon" class="glyphicon glyphicon-triangle-bottom">&nbsp;</span></a>
     </h4>
@@ -47,18 +47,13 @@
   </div>
 </div>
 
-<div id="message"></div>
-
-<div style="margin: 10pt 0">
-    <button id="export-all-slices" class='btn' onclick="jPost.importSlices()">Import Slices</button>
-    <button id="export-all-slices" class='btn slice-container' onclick="jPost.exportSlice( '' )">Export All Slices</button>
+<div>
+  <div id="message"></div>
+  <div id="slice-buttons-empty" style="color: #000000 !important;"></div>
 </div>
 
-<ul id="slice-items" class="nav nav-tabs slice-container" style="margin-top: 25px;">
-</ul>
 <div class="tab-content slice-container">
   <div class="tab-pane fade in active table-panel" id="slice">
-    <div id="button-field" style="margin-left: auto; text-align: right;"></div>
 
     <h3>Chromosome Info.</h3>
     <div id="dataset_chromosome"></div>
@@ -133,42 +128,79 @@
 
     if( jPost.slices.length === 0 ) {
         $( '.slice-container' ).css( 'display', 'none' );
-        $( '#message' ).html( 'There is no slice.' );
     }
 
+    var name = $( '#slice-name' ).val();
+    if( name === null || name === '' ) {
+        if( jPost.slices.length > 0 ) {
+            $( '#slice-name' ).val( jPost.slices[ 0 ].name );
+        }
+    }
     jPost.setSlice();
     var slice = jPost.slice;
-    var name = ( slice === null ? '' : slice.name );
+    name = ( slice === null ? '' : slice.name );
 
-    jPost.createSliceTabs( name );
     jPost.createDatasetTable( true );
     jPost.createProteinTable( true );
 
-    var tag = '<a href="javascript:jPost.exportSlice( ' + "'" + name + "'"
-            + ' )" title="Export the slice."><span class="glyphicon glyphicon-export">&nbsp;</span></a>';
-    $( '#button-field' ).append( tag );
+    var tag = '<a href="javascript:jPost.exportAllSlices()" '
+            + 'title="Export all slices.">'
+            + '<span class="slice-icon glyphicon glyphicon-export">&nbsp;</span></a>';
+    if( jPost.slices.length > 0 ) {
+        $( '#slice-buttons' ).append( tag );
+    }
 
-    tag = '<a href="javascript:jPost.openRenameDialog( ' + "'" + name + "'"
-        + ' )" title="Rename the slice."><span class="glyphicon glyphicon-edit">&nbsp;</span></a>';
-    $( '#button-field' ).append( tag );
 
-    tag = '<a href="javascript:jPost.deleteSlice( ' + "'" + name + "'"
-        + ' )" title="Export the slice."><span class="glyphicon glyphicon-trash">&nbsp;</span></a>';
-    $( '#button-field' ).append( tag );
+    if( jPost.slices.length === 0 ) {
+        tag = '<a href="javascript:jPost.importSlices()"  style="text-decoration: none; color: #000000;" '
+            + 'title="Import slices.">&nbsp;&nbsp&nbsp;<span class="glyphicon glyphicon-import">&nbsp;</span></a>';
+        $( '#message' ).html( '<span>There is no slice.</span>' + tag );
+    }
+    else {
+        tag = '<a href="javascript:jPost.importSlices()" '
+            + 'title="Import slices."><span class="slice-icon glyphicon glyphicon-import">&nbsp;</span></a>';
+        $( '#slice-buttons' ).append( tag );
+        $( '#slice-buttons' ).append( '<span>&nbsp;&nbsp;&nbsp;</span>' );
+    }
+
+
+    tag = '<a href="javascript:jPost.exportSlice()" '
+            + 'title="Export the slice."><span class="slice-icon glyphicon glyphicon-export">&nbsp;</span></a>';
+    $( '#slice-buttons' ).append( tag );
+
+    tag = '<a href="javascript:jPost.openRenameDialog()" '
+        + ' )" title="Rename the slice."><span class="slice-icon glyphicon glyphicon-edit">&nbsp;</span></a>';
+    $( '#slice-buttons' ).append( tag );
+
+    tag = '<a href="javascript:jPost.deleteSlice()" '
+        + ' )" title="Remove the slice."><span class="slice-icon glyphicon glyphicon-trash">&nbsp;</span></a>';
+    $( '#slice-buttons' ).append( tag );
 
     var stanzas = [
-        'kegg_mapping_form', 'dataset_chromosome', 'protein_evidence'
-    ];
-
-    if( slice !== null && slice.datasets.length > 0 ) {
-        var datasets = encodeURI( jPost.sets.datasets.join( ' ' ) );
-        stanzas.forEach(
-            function( stanza ) {
-                var url = 'stanza?stanza=' + stanza + '&datasets=' + datasets + '&dataset=' + datasets;
-                $( '#' + stanza ).load( url );
+        {
+            name: 'kegg_mapping_form',
+            id: 'kegg_mapping_form',
+            data: function() {
+                return { dataset: jPost.sets.datasets.join( ' ' ) }
             }
-        );
-    }
+        },
+        {
+            name: 'dataset_chromosome',
+            id: 'dataset_chromosome',
+            data: function() {
+                return { dataset: jPost.sets.datasets.join( ' ' ) }
+            }
+        },
+        {
+            name: 'protein_evidence',
+            id: 'protein_evidence',
+            data: function() {
+                return { dataset: jPost.sets.datasets.join( ' ' ) }
+            }
+        }
+    ];
+    jPost.setStanzas( stanzas );
+    jPost.loadStanzas();
 
     $( '#upload_slices' ).on(
         'change',

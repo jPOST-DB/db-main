@@ -18,24 +18,6 @@ jPost.getSlice = function( name ) {
     return slice;
 }
 
-// create slice tabs
-jPost.createSliceTabs = function( name ) {
-    jPost.slices.forEach(
-        function( slice ) {
-            var tag = '';
-            if( name === slice.name ) {
-                tag = '<li class="nav-item active"><a class="nav-link bg-primary" href="slices?slice='
-                    + slice.name + '">' + slice.name + '</a></li>';
-            }
-            else {
-                tag = '<li class="nav-item"><a class="nav-link bg-primary" href="slices?slice='
-                    + slice.name + '">' + slice.name + '</a></li>';
-            }
-            $( '#slice-items' ).append( tag );
-        }
-    );
-}
-
 // open dataset
 jPost.openDataset = function( id ) {
     var name = $( '#slice-name' ).val();
@@ -82,9 +64,8 @@ jPost.openPeptide = function( id ) {
 jPost.setSlice = function() {
     var name = $( '#slice-name' ).val();
     var slice = jPost.getSlice( name );
-    console.log( name );
-    console.log( slice );
 
+    jPost.sets.datasets = [];
     if( slice !== null ) {
         slice.datasets.forEach(
             function( dataset ) {
@@ -304,34 +285,42 @@ jPost.compareSlices = function() {
 }
 
 // export Slices
-jPost.exportSlice = function( name ) {
-  var array = [];
-	var filename = '';
+jPost.exportSlice = function() {
+    var slice = jPost.slice;
 
-	if( name == null || name == '' ) {
-		  filename = 'all.json';
-		  array = jPost.slices;
-	}
-	else {
-		  filename = name + '.json';
-		  var slice = jPost.getSlice( name );
-		  if( slice != null ) {
-			    array.push( slice );
-      }
-	}
+	  if( slice == null ) {
+        return;
+    }
 
-	if( array.length == 0 ) {
-		  alert( 'There are no slices.' );
-	}
-	else {
-		  var json = JSON.stringify( array );
-		  var file = new File(
-				  [ json ],
-				  filename,
-				  { type: 'text/plain;charset=utf-8' }
-      );
-		  saveAs( file );
-	}
+    var array = [ slice ];
+    var name = slice.name;
+	  var filename = name + '.json';
+
+    jPost.exportSlices( filename, array );
+}
+
+// export all slices
+jPost.exportAllSlices = function() {
+    var filename = 'all.json';
+    var array = jPost.slices;
+
+    jPost.exportSlices( filename, array );
+}
+
+// save slices
+jPost.exportSlices = function( filename, array ) {
+    if( array.length == 0 ) {
+        alert( 'There are no slices.' );
+    }
+	  else {
+		    var json = JSON.stringify( array );
+		    var file = new File(
+				    [ json ],
+				    filename,
+				    { type: 'text/plain;charset=utf-8' }
+        );
+		    saveAs( file );
+	  }
 }
 
 // import slices
@@ -340,9 +329,13 @@ jPost.importSlices = function() {
 }
 
 // open rename dialog
-jPost.openRenameDialog = function( name ) {
-    $( '#dialog-rename-slice-old-name' ).val( name );
-    $( '#dialog-rename-slice-new-name' ).val( name );
+jPost.openRenameDialog = function() {
+    var slice = jPost.slice;
+    if( slice === null ) {
+        return;
+    }
+    $( '#dialog-rename-slice-old-name' ).val( slice.name );
+    $( '#dialog-rename-slice-new-name' ).val( slice.name );
     $( '#dialog-rename-slice' ).modal( 'show' );
 }
 
@@ -370,7 +363,13 @@ jPost.renameSlice = function() {
 
 
 // delete slice
-jPost.deleteSlice = function( name ) {
+jPost.deleteSlice = function() {
+    var slice = jPost.slice;
+    if( slice === null ) {
+        return;
+    }
+    var name = slice.name;
+
     if( confirm( 'Are you sure to delete the slice?' ) ) {
         var index = -1;
         for( var i = 0; i < jPost.slices.length; i++ ) {
@@ -392,4 +391,49 @@ jPost.deleteSlice = function( name ) {
             window.location.href = 'slices'
         }
     }
+}
+
+// select slices
+jPost.selectSlice = function( name ) {
+    if( $( '#slice-naem'  ).val() === name ) {
+      return;
+    }
+    $( '#slice-name' ).val( name );
+    jPost.setSlice();
+    jPost.updateTables();
+    $( '.slice-title-name' ).html( name );
+
+    jPost.loadStanzas();
+}
+
+// remove datasets
+jPost.removeDatasets = function() {
+    var array = jPost.getCheckedArray( 'check_dataset' );
+    if( array.length == 0 ) {
+        alert( "No datasets are not selected. Please check one or more datasets." );
+        return;
+	  }
+
+    var slice = jPost.slice;
+    if( slice === null ) {
+        return;
+    }
+
+    slice.base = Object.assign( {}, slice );
+    slice.operation = 'remove';
+    slice.parameters = jPost.getSearchParameters();
+    slice.date = jPost.getDate();
+    slice.datasets = [];
+
+    slice.base.datasets.forEach(
+        function( dataset ) {
+            var index = array.indexOf( dataset );
+            if( index < 0 ) {
+                slice.datasets.push( dataset );
+            }
+        }
+    );
+
+    jPost.saveSlices();
+    jPost.selectSlice( slice.name );
 }

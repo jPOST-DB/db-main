@@ -8,7 +8,7 @@
 <h3>Protein Browser</h3>
 <div id="protein_browser"></div>
 
-<h3>Proteoforms</h3>
+<h3>Peptide Sharing</h3>
 <div id="proteoform_browser"></div>
 
 <ul class="nav nav-tabs">
@@ -29,22 +29,51 @@
 </div>
 
 <script>
-    var stanzas = [
-        'table_protein', 'protein_browser', 'proteoform_browser'
-    ];
-
-    stanzas.forEach(
-        function( stanza ) {
-            var url = 'stanza?stanza=' + stanza + '&uniprot={{ $id }}';
-            $( '#' + stanza ).load( url );
-        }
-    );
-
-    jPost.sets[ 'proteins' ] = [ '{{ $id }}' ];
-
     jPost.setSlice();
+
+    var id = '{{ $id }}';
+
+    jPost.sets[ 'proteins' ] = [ id ];
+
     jPost.createPeptideTable();
     jPost.createPsmTable();
+
+    var stanzas = [
+        {
+            name: 'table_protein',
+            id: 'table_protein',
+            data: function() {
+                return {
+                    uniprot: id,
+                    dataset: jPost.sets.datasets.join( ' ' )
+                };
+            }
+        },
+        {
+            name: 'protein_browser',
+            id: 'protein_browser',
+            data: function() {
+                return {
+                    uniprot: id,
+                    dataset: jPost.sets.datasets.join( ' ' )
+                };
+            }
+        },
+        {
+            name: 'proteoform_browser',
+            id: 'proteoform_browser',
+            data: function() {
+                return {
+                    uniprot: id,
+                    dataset: jPost.sets.datasets.join( ' ' )
+                };
+            }
+        }
+    ];
+
+    jPost.setStanzas( stanzas );
+    jPost.loadStanzas();
+
 </script>
 
 
