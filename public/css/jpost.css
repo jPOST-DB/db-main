@@ -15,8 +15,41 @@ table {
   text-transform: none !important;
 }
 
-.slice-selection {
-  opacity: 0;
+#dropdown-button {
+  font-size: 20px;
+  border: none;
+  background-color: #008000;
+  font-weight: bold;
+  color: #ffffff;
+  box-shadow: none;
+  width: 250px;
+  float: left;
+  text-align: left;
+}
+
+#slice-buttons {
+  padding-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  width: 100%;
+  margin: 0;
+}
+
+#message {
+  font-size: 20px;
+  color: #000000;
+  background-color: #ffffff;
+  font-weight: bold;
+}
+
+.slice-icon {
+  color: #ffffff;
+}
+
+
+
+.dropdown-menu > li {
+  font-size: 20px;
 }
 
 .slice-header {

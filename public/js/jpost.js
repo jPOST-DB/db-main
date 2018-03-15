@@ -13,6 +13,7 @@ jPost.sets = {
 }
 
 jPost.tables = [];
+jPost.stanzas = [];
 
 // create select
 jPost.createSelect = function( element, item ) {
@@ -565,4 +566,23 @@ jPost.getDate = function() {
     }
 
     return date;
+}
+
+// set stanzas
+jPost.setStanzas = function( stanzas ) {
+    jPost.stanzas = stanzas;
+}
+
+// load stanzas
+jPost.loadStanzas = function() {
+    jPost.stanzas.forEach(
+        function( stanza ) {
+            var url = 'stanza?stanza=' + stanza.name;
+            var params = stanza.data();
+            for( key in params ) {
+                url += '&' + key + '=' + encodeURI( params[ key ] );
+                $( '#' + stanza.id ).load( url );
+            }
+        }
+    );
 }
