@@ -6,7 +6,7 @@
 <div id="table_dataset"></div>
 
 <h3>Chromosome Info.</h3>
-<div id="dataset_chromosome"></div>
+<div id="chromosome_histogram"></div>
 
 <h3>Protein Existence</h3>
 <div id="protein_evidence"></div>
@@ -35,6 +35,7 @@
 <script>
     var id = '{{ $id }}';
     jPost.sets[ 'datasets' ] = [ id ];
+
     jPost.setSlice();
     jPost.createProteinTable( false );
     jPost.createPeptideTable();

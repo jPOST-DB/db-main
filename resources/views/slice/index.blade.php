@@ -56,7 +56,7 @@
   <div class="tab-pane fade in active table-panel" id="slice">
 
     <h3>Chromosome Info.</h3>
-    <div id="dataset_chromosome"></div>
+    <div id="chromosome_histogram"></div>
 
     <h3>Protein Existence</h3>
     <div id="protein_evidence"></div>
@@ -162,7 +162,6 @@
         $( '#slice-buttons' ).append( tag );
         $( '#slice-buttons' ).append( '<span>&nbsp;&nbsp;&nbsp;</span>' );
     }
-
 
     tag = '<a href="javascript:jPost.exportSlice()" '
             + 'title="Export the slice."><span class="slice-icon glyphicon glyphicon-export">&nbsp;</span></a>';
