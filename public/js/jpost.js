@@ -581,8 +581,8 @@ jPost.loadStanzas = function() {
             var params = stanza.data();
             for( key in params ) {
                 url += '&' + key + '=' + encodeURI( params[ key ] );
-                $( '#' + stanza.id ).load( url );
             }
+            $( '#' + stanza.id ).load( url );            
         }
     );
 }
