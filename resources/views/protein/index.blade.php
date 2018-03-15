@@ -8,7 +8,7 @@
 <h3>Protein Browser</h3>
 <div id="protein_browser"></div>
 
-<h3>Proteoforms</h3>
+<h3>Peptide Sharing</h3>
 <div id="proteoform_browser"></div>
 
 <ul class="nav nav-tabs">
