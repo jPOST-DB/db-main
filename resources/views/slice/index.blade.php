@@ -53,35 +53,34 @@
 </div>
 
 <div class="tab-content slice-container">
-  <div class="tab-pane fade in active table-panel" id="slice">
+  <div id="table_slice"></div>
 
-    <h3>Chromosome Info.</h3>
-    <div id="chromosome_histogram"></div>
+  <h3>Chromosome Info.</h3>
+  <div id="chromosome_histogram"></div>
 
-    <h3>Protein Existence</h3>
-    <div id="protein_evidence"></div>
+  <h3>Protein Existence</h3>
+  <div id="protein_evidence"></div>
 
-    <h3>KEGG Pathway Mapping</h3>
-    <div id="kegg_mapping_form"></div>
+  <h3>KEGG Pathway Mapping</h3>
+  <div id="kegg_mapping_form"></div>
 
-    <ul class="nav nav-tabs" style="margin-top: 25px;">
-      <li class="nav-item active"><a class="nav-link bg-primary" href="#table-tab-dataset" data-toggle="tab">Dataset</a></li>
-      <li class="nav-item"><a class="nav-link bg-primary" href="#table-tab-protein"  data-toggle="tab">Protein</a></li>
-    </ul>
-    <div class="tab-content">
-      <div class="tab-pane fade in active table-panel" id="table-tab-dataset">
-        <form id="dataset-form" onsubmit="return false;">
-          <div id="table-dataset" class="display"></div>
-        </form>
-        <div>
-          <button class="btn" onclick="jPost.removeDatasets()">Remove from Slice</button>
-        </div>
+  <ul class="nav nav-tabs" style="margin-top: 25px;">
+    <li class="nav-item active"><a class="nav-link bg-primary" href="#table-tab-dataset" data-toggle="tab">Dataset</a></li>
+    <li class="nav-item"><a class="nav-link bg-primary" href="#table-tab-protein"  data-toggle="tab">Protein</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane fade in active table-panel" id="table-tab-dataset">
+      <form id="dataset-form" onsubmit="return false;">
+        <div id="table-dataset" class="display"></div>
+      </form>
+      <div>
+        <button class="btn" onclick="jPost.removeDatasets()">Remove from Slice</button>
       </div>
-      <div class="tab-pane fade table-panel" id="table-tab-protein">
-        <form id="protein-form" onsubmit="return false;">
-          <div id="table-protein" class="display"></div>
-        </form>
-      </div>
+    </div>
+    <div class="tab-pane fade table-panel" id="table-tab-protein">
+      <form id="protein-form" onsubmit="return false;">
+        <div id="table-protein" class="display"></div>
+      </form>
     </div>
   </div>
 </div>
@@ -176,6 +175,13 @@
     $( '#slice-buttons' ).append( tag );
 
     var stanzas = [
+        {
+            name: 'table_slice',
+            id: 'table_slice',
+            data: function() {
+                return { dataset: jPost.sets.datasets.join( ' ' ) }
+            }
+        },
         {
             name: 'kegg_mapping_form',
             id: 'kegg_mapping_form',
