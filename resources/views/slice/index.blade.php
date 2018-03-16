@@ -184,8 +184,8 @@
             }
         },
         {
-            name: 'dataset_chromosome',
-            id: 'dataset_chromosome',
+            name: 'chromosome_histogram',
+            id: 'chromosome_histogram',
             data: function() {
                 return { dataset: jPost.sets.datasets.join( ' ' ) }
             }
