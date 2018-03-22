@@ -53,13 +53,14 @@
 </div>
 
 <ul class="nav nav-tabs" style="margin-top: 25px;">
-  <li class="nav-item active"><a class="nav-link bg-primary" href="#table-tab-dataset" data-toggle="tab">Dataset</a></li>
-  <li class="nav-item"><a class="nav-link bg-primary" href="#table-tab-protein"  data-toggle="tab">Protein</a></li>
-  <li class="nav-item"><a class="nav-link bg-primary" href="#table-tab-dataset-excluded"  data-toggle="tab">Excluded Dataset</a></li>
-<!--
-  <li class="nav-item"><a class="nav-link bg-primary" href="#table-tab-protein-excluded"  data-toggle="tab">Excluded Protein</a></li>
--->
+  <li class="nav-item active"><a id="tab-dataset" class="nav-link bg-primary" href="#table-tab-dataset" data-toggle="tab">Dataset</a></li>
+  <li class="nav-item"><a id="tab-protein" class="nav-link bg-primary" href="#table-tab-protein"  data-toggle="tab">Protein</a></li>
+  <li class="nav-item"><a id="tab-ex-dataset" class="nav-link bg-primary" href="#table-tab-dataset-excluded"  data-toggle="tab">Excluded Dataset</a></li>
 </ul>
+<script>
+  $( '#tab-protein' ).on( 'click', function() { $( '#protein' ).tabulator( 'setData' ); } );
+  $( '#tab-ex-dataset' ).on( 'click', function() { $( '#dataset-excluded' ).tabulator( 'setData' ); } );
+</script>
 <div class="tab-content">
   <div class="tab-pane fade in active table-panel" id="table-tab-dataset">
     <form id="dataset-form" onsubmit="return false;">
@@ -84,14 +85,6 @@
       <button class="btn" onclick="jPost.restoreDatasets()">Restore</button>
     </div>
   </div>
-<!--
-  <div class="tab-pane fade table-panel" id="table-tab-protein-excluded">
-    <form id="protein-form" onsubmit="return false;">
-      <div id="table-protein-excluded" class="display"></div>
-    </form>
-    <button class="btn" onclick="jPost.restoreProteins()">Restore</button>
-  </div>
--->
 </div>
 
 
@@ -121,7 +114,6 @@
     jPost.createDatasetTable( true );
     jPost.createProteinTable( true );
     jPost.createExcludedDatasetTable();
-//    jPost.createExcludedProteinTable();
 </script>
 
 

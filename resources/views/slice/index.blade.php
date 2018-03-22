@@ -66,8 +66,10 @@
 
   <ul class="nav nav-tabs" style="margin-top: 25px;">
     <li class="nav-item active"><a class="nav-link bg-primary" href="#table-tab-dataset" data-toggle="tab">Dataset</a></li>
-    <li class="nav-item"><a class="nav-link bg-primary" href="#table-tab-protein"  data-toggle="tab">Protein</a></li>
-  </ul>
+    <li class="nav-item"><a id="tab-protein" class="nav-link bg-primary" href="#table-tab-protein"  data-toggle="tab">Protein</a></li>
+<script>
+  $( '#tab-protein' ).on( 'click', function() { $( '#protein' ).tabulator( 'setData' ); } );
+</script>  
   <div class="tab-content">
     <div class="tab-pane fade in active table-panel" id="table-tab-dataset">
       <form id="dataset-form" onsubmit="return false;">

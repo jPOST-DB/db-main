@@ -16,9 +16,13 @@
 
 
 <ul class="nav nav-tabs">
-  <li class="nav-item active"><a class="nav-link bg-primary" href="#table-tab-protein" data-toggle="tab">Protein</a></li>
-  <li class="nav-item"><a class="nav-link bg-primary" href="#table-tab-peptide"  data-toggle="tab">Peptide</a></li>
+  <li class="nav-item active"><a id="tab-protein" class="nav-link bg-primary" href="#table-tab-protein" data-toggle="tab">Protein</a></li>
+  <li class="nav-item"><a id="tab-peptide" class="nav-link bg-primary" href="#table-tab-peptide"  data-toggle="tab">Peptide</a></li>
 </ul>
+<script>
+  $( '#tab-protein' ).on( 'click', function() { $( '#protein' ).tabulator( 'setData' ); } );
+  $( '#tab-peptide' ).on( 'click', function() { $( '#peptide' ).tabulator( 'setData' ); } );
+</script>
 <div class="tab-content">
   <div class="tab-pane fade in active table-panel" id="table-tab-protein">
     <form id="protein-form" onsubmit="return false;">
@@ -33,11 +37,11 @@
 </div>
 
 <script>
-    var id = '{{ $id }}';
-    jPost.sets[ 'datasets' ] = [ id ];
-
     jPost.setSlice();
 
+    var id = '{{ $id }}';
+    jPost.sets[ 'datasets' ] = [ id ];
+    
     var stanzas = [
         {
             name: 'table_dataset',
@@ -73,7 +77,7 @@
     jPost.loadStanzas();
 
     jPost.createProteinTable( false );
-    jPost.createPeptideTable();    
+    jPost.createPeptideTable();
 </script>
 
 @endsection

@@ -12,9 +12,13 @@
 <div id="proteoform_browser"></div>
 
 <ul class="nav nav-tabs">
-  <li class="nav-item active"><a class="nav-link bg-primary" href="#table-tab-peptide" data-toggle="tab">Peptide</a></li>
-  <li class="nav-item"><a class="nav-link bg-primary" href="#table-tab-psm"  data-toggle="tab">Psm</a></li>
+  <li class="nav-item active"><a id="tab-peptide" class="nav-link bg-primary" href="#table-tab-peptide" data-toggle="tab">Peptide</a></li>
+  <li class="nav-item"><a id="tab-psm" class="nav-link bg-primary" href="#table-tab-psm"  data-toggle="tab">Psm</a></li>
 </ul>
+<script>
+  $( '#tab-peptide' ).on( 'click', function() { $( '#peptide' ).tabulator( 'setData' ); } );
+  $( '#tab-psm' ).on( 'click', function() { $( '#psm' ).tabulator( 'setData' ); } );  
+</script>
 <div class="tab-content">
   <div class="tab-pane fade in active table-panel" id="table-tab-peptide">
     <form id="peptide-form" onsubmit="return false;">
