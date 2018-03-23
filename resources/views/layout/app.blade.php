@@ -151,9 +151,14 @@
       </div>
     </div>
 
-    <form id="common-form" method="get">
+    <form id="common-form" method="get"
     </form>
     <div id="tmp" style="display: none;">
     </div>
-  </body
+    <div style="width: 100%; border-top: solid #cccccc 1px; margin-top: 15px; padding: 15px;">
+        <a href="http://www.jst.go.jp/EN/"><img width="50" src="img/help/jst.png"></a>
+        <a href="http://biosciencedbc.jp/en/"><img width="100" src="img/help/nbdc.png"></a>
+        <p>© 2018, Japan Proteome Sandard repository/database (<a href="http://jpostdb.org/">jPOST</a>), All rights reserved.</p>
+    </div>
+  </body>
 </html>
