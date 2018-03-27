@@ -6,7 +6,7 @@
 
 <html>
   <head>
-    <title>jPOST Database</title>
+    <title>jPOST database</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/tabulator.min.css" rel="stylesheet">
@@ -36,7 +36,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index">jPOST Database</a>
+          <a class="navbar-brand" href="index">jPOST database</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
           <ul id="header-menu" class="nav navbar-nav">
@@ -155,7 +155,7 @@
     </form>
     <div id="tmp" style="display: none;">
     </div>
-    <div style="width: 100%; border-top: solid #cccccc 1px; margin-top: 15px; padding: 15px;">
+    <div style="text-align: center; width: 100%; border-top: solid #cccccc 1px; margin-top: 15px; padding: 15px;">
         <a href="http://www.jst.go.jp/EN/"><img width="50" src="img/help/jst.png"></a>
         <a href="http://biosciencedbc.jp/en/"><img width="100" src="img/help/nbdc.png"></a>
         <p>© 2018, Japan Proteome Sandard repository/database (<a href="http://jpostdb.org/">jPOST</a>), All rights reserved.</p>
