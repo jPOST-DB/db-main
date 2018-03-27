@@ -271,9 +271,14 @@ jPost.compareSlices = function() {
     var slice1 = jPost.getSlice( name1 );
     var slice2 = jPost.getSlice( name2 );
 
+    localStorage.removeItem( 'jPOST-compare' );
+
     if( slice1 === null || slice2 === null ) {
         return;
     }
+
+    name1 = encodeURI( name1 );
+    name2 = encodeURI( name2 );
 
     var datasets1 = encodeURI( slice1.datasets.join( ' ' ) );
     var datasets2 = encodeURI( slice2.datasets.join( ' ' ) );
@@ -282,6 +287,10 @@ jPost.compareSlices = function() {
             + datasets1 + '&dataset2=' + datasets2
             + '&slice1=' + name1 + '&slice2=' + name2;
     $( '#comparison-chart' ).load( url );
+    jPost.saveCompareSlices();
+
+    var json = JSON.stringify( [ slice1.name, slice2.name ] );
+  	localStorage.setItem( 'jPOST-compare', json );        
 }
 
 // export Slices
