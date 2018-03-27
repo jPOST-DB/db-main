@@ -1,4 +1,7 @@
 <style>
+ul {
+  font-size: 16px;
+}
 ul.ul_level1 {
   list-style:none;
 }
@@ -6,16 +9,20 @@ ul.ul_level1 {
 
 <h2>What is “jPOST database”?</h2>
 <ul class="ul_level1">
-  <li>The jPOST database is a database containing re-analysis results with unified criteria for raw data from <a href="htps://repository.jpostdb.org/">jPOSTrepo</a> and the <a href="http://www.proteomexchange.org/">ProteomeXchange</a> (PX) repositories.</li>
+  <li>The jPOST database is a database containing re-analysis results with unified criteria for raw data from <a href="https://repository.jpostdb.org/">jPOSTrepo</a> and other <a href="http://www.proteomexchange.org/">ProteomeXchange</a> (PX) repositories.</li>
   <li>It provides following functions:</li>
   <li>
     <ul>
-      <li>Dataset filtering by meta-data</li>
+      <li>Dataset filtering by metadata</li>
       <li>Browsing of identified peptides, post-translational modifications (PTMs), and other data</li>
       <li>Creation and comparison of “Slice”, which is dataset(s) filtered by a user</li>
       <li>Basic statistical analysis and visualization of a specified “Slice”</li>
     </ul>
   </li>
+  <li>The jPOST database stores Peptide Spectrum Match (PSM) information and identified peptide information for each dataset.</li>
+  <li>Proteins are inferred based on these information by using the method proposed by <a href="http://www.mcponline.org/content/4/10/1419.abstract">Nesvizhskii, A.I. et al. 2005</a> (doi:10.1074/mcp.R500012-MCP200)</li>
+  <li>The jPOST database used the UniProt Reference Proteome dataset (with additional.fasta file) for peptide identification.</li>
+  <li>The information such as datasets, inferred proteins, identified peptides, and PSMs is hierarchically stored in the jPOST database. The whole dataset union is named “Globe,” and the retrieved partial datasets filtered from the Globe is named “Slice.”</li>
   <li><img width="640" src="img/help/flow.png"></li>
 </ul>
 
@@ -24,8 +31,8 @@ ul.ul_level1 {
   <li>1. Filtering</li>
   <li>
     <ul>
-      <li>Users can filter Globe by metadata, such as species, sample type, and cell line, and/or keyword(s) in order to select datasets of your interests. </li>
-      <li>Users can also specify species and disease metadata by clicking pie chart.</li>
+      <li>Curated metadata such as species, sample types and cell lines are provided for filtering Globe, the whole dataset union, as well as simple keyword search.</li>
+      <li>Pie charts on the right can be used for specifying species and disease metadata, just by clicking the target.</li>
     </ul>
   </li>
   <li><img width="640" src="img/help/search.png"></li>
@@ -34,36 +41,22 @@ ul.ul_level1 {
     <ul>
       <li>Select check box(es) your interested dataset(s).</li>
       <li>Click ‘Add to Slice’ button.</li>
-      <li>Because the Slice data is stored in WebStorage of your browser, your data is never leaked to the Internet. The different browser in your computer is not shared WebStorage. So, you need to export and import the Slice to observe the same datasets in the different location (the different browser).</li>
+      <li>Because the Slice data is stored in WebStorage of your browser, your data is never leaked to the Internet. The different browser in your computer does not share WebStorage. So, you need to export and import the Slice to observe the same datasets in the different location (the different browser).</li>
     </ul>
   </li>
   <li><img width="500" src="img/help/slice_check.png"><img width="400" src="img/help/slice_new.png"></li>
   <li>3. Comparing Slices</li>
   <li>
     <ul>
-      <li>Users can compare two saved Slices statistically.</li>
-      <li>The details are described later.</li>
+      <li>Two selected slices can be compared for statistical and functional analyses.</li>
+      <li>The details are described below.</li>
     </ul>
   </li>
 </ul>
 
-<h2>Data structure</h2>
+<h2>Information pages for dataset, slice and protein</h2>
 <ul class="ul_level1">
-  <li>The jPOST database stores Peptide Spectrum Match (PSM) information and identified peptide information for each dataset.</li>
-  <li>Proteins are inferred based on these information. The employed inference method is described the following reference:</li>
-  <li>
-    <ul>
-      <li><a href="http://www.mcponline.org/content/4/10/1419.abstract">Nesvizhskii, A.I. et al. 2005</a> (doi:10.1074/mcp.R500012-MCP200)</li>
-    </ul>
-  </li>
-  <li>The information such as datasets, inferred proteins, identified peptides, and PSMs is hierarchically stored in the jPOST database<!-- (Fig. 1)-->. The whole dataset union is named “Globe,” and the retrieved partial datasets filtered from the Globe is named “Slice.”</li>
-</ul>
-
-<!-- (diagram) -->
-
-<ul class="ul_level1">
-  <li>On the pages for Slice, Dataset, and Protein, the attribution information for the current selected data is displayed. Namely, for Dataset or Slice, “Chromosome Info”, “Protein Existence”, and “KEGG Pathway Mapping” are displayed. For Protein, “Protein browser” and “Peptide sharing” are displayed.</li>
-  <li>The jPOST database used the UniProt Reference Proteome dataset (with additional.fasta file) for peptide identification.</li>
+  <li>Dataset and slice pages consists of "Chromosome Info", "Protein Existence" and "KEGG Pathway Mapping", whereas protein pages consists of "Protein Browser" and "Peptide sharing".</li>
 </ul>
 
 <h3>Chromosome Info.</h3>
@@ -77,16 +70,16 @@ ul.ul_level1 {
   <li>Pie chart of the evidence types that supports existence of proteins, described in <a href="https://www.nextprot.org/">neXtProt database</a> (for human) and <a href="http://www.uniprot.org/">UniProt database</a> (for others).<li>
   <li>
     <ul>
-      <li>(ref. <a href=”http://www.uniprot.org/help/protein_existence”>uniprot:protein_existence</a>)</li>
+      <li>(ref. <a href="http://www.uniprot.org/help/protein_existence">uniprot:protein_existence</a>)</li>
     </ul>
   </li>
-  <li>The protein list is displayed from pulldown menu or a clickable legend/chart.</li>
+  <li>Proteins classified as each evidence type are listed by using pulldown menu or clickable legend/chart.</li>
   <li><img width="500" src="img/help/protein_level.png"></li>
 </ul>
 
 <h3>KEGG Pathway Mapping</h3>
 <ul class="ul_level1">
-  <li>Proteins with <a href="http://www.genome.jp/kegg/ko.html">KEGG Orthology</a> (KO) annotation are able to map to <a href="http://www.genome.jp/kegg/pathway.html">KEGG pathway</a>. The box color of pathway map varies red to blue (red shows high expression and blue shows low). The expression value is based on spectral count.</li>
+  <li>Proteins with <a href="http://www.genome.jp/kegg/ko.html">KEGG Orthology</a> (KO) annotation can be mapped to <a href="http://www.genome.jp/kegg/pathway.html">KEGG pathway</a>. The protein box color of pathway maps varies red to blue (red and blue show high and low expressions, respectively, based on their spectral counts).</li>
 </ul>
 
 <h3>Protein Browser</h3>
@@ -97,7 +90,7 @@ ul.ul_level1 {
       <li>'Peptide alignment' shows detected peptides mapping to protein sequence. The color of peptide bars reflects the number of PSM, and varies red to gray (red shows high and gray shows low).</li>
       <li>'PTM site' shows detected PTMs on protein sequence. The vertical bar length above the site reflects the count of PTM detection. ' norm.' shows normalized length by spectral counts including the site, and ‘count’ shows real counts.</li>
       <li>'P-site linkage' shows co-occurrence of phosphorylation sites on a peptide.</li>
-      <li>'UniProt annotation' shows PTM sites and single amino acid variations descripted in UniProt.</li>
+      <li>'UniProt annotation' shows PTM sites and single amino acid variations described in UniProt.</li>
     </ul>
   </li>
   <li><img width="640" src="img/help/protein.png"></li>
@@ -111,7 +104,7 @@ ul.ul_level1 {
 
 <h3>Peptide Sharing</h3>
 <ul class="ul_level1">
-  <li>Peptide sharing shows shared peptides mapping to multi-proteins. The same color of peptide bars means the same peptides. Numeric values over a peptide bar is the number of PSM. Users can switch the display with six buttons below the alignments.</li>
+  <li>Peptide sharing shows shared peptides mapping to multiple proteins. The same color of peptide bars means the same peptides. Numeric values over a peptide bar is the number of PSM. Users can switch the display with six buttons below the alignments.</li>
   <li>
     <ul>
       <li>name: switch visible/invisible of protein names</li>
@@ -177,10 +170,10 @@ ul.ul_level1 {
   <li>Protein type</li>
   <li>
     <ul>
-      <li>Leading protein: The representative protein in a protein group. (ref. <a href=”http://purl.obolibrary.org/obo/MS_1002401”>PSI-MS_1002401</a>)</li>
-      <li>Spectrum same-set protein: The protein which matched same-set of spectrum (same-set of PSM) of a leading protein. (ref. <a href=”http://purl.obolibrary.org/obo/MS_1001595”>PSI-MS_1001595</a>)</li>
-      <li>Spectrum sub-set protein: The protein which matched sub-set spectrum of a leading protein. (ref. <a href=”http://purl.obolibrary.org/obo/MS_1001597”>PSI-MS_1001597</a>)</li>
-      <li>Spectrum subsumable protein: The protein of which spectrum are across two or more leading proteins. (ref. <a href=”http://purl.obolibrary.org/obo/MS_1001599”>PSI-MS_1001599</a></li>
+      <li>Leading protein: The representative protein in a protein group. (ref. <a href="http://purl.obolibrary.org/obo/MS_1002401">PSI-MS_1002401</a>)</li>
+      <li>Spectrum same-set protein: The protein which matched same-set of spectrum (same-set of PSM) of a leading protein. (ref. <a href="http://purl.obolibrary.org/obo/MS_1001595">PSI-MS_1001595</a>)</li>
+      <li>Spectrum sub-set protein: The protein which matched sub-set spectrum of a leading protein. (ref. <a href="http://purl.obolibrary.org/obo/MS_1001597">PSI-MS_1001597</a>)</li>
+      <li>Spectrum subsumable protein: The protein of which spectrum are across two or more leading proteins. (ref. <a href="http://purl.obolibrary.org/obo/MS_1001599">PSI-MS_1001599</a>)</li>
     </ul>
   </li>
   <li>Peptide type</li>

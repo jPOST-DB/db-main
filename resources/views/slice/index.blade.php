@@ -155,7 +155,7 @@
     if( jPost.slices.length === 0 ) {
         tag = '<a href="javascript:jPost.importSlices()"  style="text-decoration: none; color: #000000;" '
             + 'title="Import slices.">&nbsp;&nbsp&nbsp;<span class="glyphicon glyphicon-import">&nbsp;</span></a>';
-        $( '#message' ).html( '<span>There is no slice.</span>' + tag );
+        $( '#message' ).html( '<span>No silce is available.</span>' + tag );
     }
     else {
         tag = '<a href="javascript:jPost.importSlices()" '
